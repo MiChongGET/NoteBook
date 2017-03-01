@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cui.fabspeeddial.MainActivity">
+    <item
+        android:id="@+id/activity_setting"
+        android:orderInCategory="100"
+        android:title="设置"
+        android:icon="@drawable/ic_setting_24dp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/search"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="搜索日记"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/riji_write"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_border_color_black_24dp"
+        android:title="写日记"
+        app:showAsAction="never" />
+</menu>
