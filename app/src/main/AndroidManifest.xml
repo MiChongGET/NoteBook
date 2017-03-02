@@ -11,7 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainUI.MainActivity" />
         <activity android:name=".Guide.Guide" />
-        <activity android:name=".Guide.WelcomeAct">
+        <activity
+            android:name=".Guide.WelcomeAct"
+            android:theme="@style/welcompage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,8 @@
         </activity>
         <activity android:name=".Passwd.PassWordActivity" />
         <activity android:name=".Setting.Setting" />
-        <activity android:name=".Functions.Write_note"></activity>
+        <activity android:name=".Functions.Write_note" />
+        <activity android:name=".MainUI.SecondActivity"></activity>
     </application>
 
 </manifest>

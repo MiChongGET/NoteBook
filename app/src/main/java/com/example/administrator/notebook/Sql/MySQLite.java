@@ -1,28 +1,30 @@
 package com.example.administrator.notebook.Sql;
 
-import java.sql.SQLData;
-import java.sql.SQLException;
-import java.sql.SQLInput;
-import java.sql.SQLOutput;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by Administrator on 2017/2/24 0024.
  */
 
-public class MySQLite implements SQLData {
-    @Override
-    public String getSQLTypeName() throws SQLException {
+public class MySQLite extends SQLiteOpenHelper {
 
-        return null;
+    public MySQLite(Context context) {
+        super(context, "db", null, 1);
     }
 
     @Override
-    public void readSQL(SQLInput stream, String typeName) throws SQLException {
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("create table user(" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "title TEXT DEFAULT NULL," +
+                "content TEXT DEFAULT " +
+                "前[CreatedTime] TimeStamp NOT NULL DEFAULT (datetime('now','localtime')\"\")");
     }
 
     @Override
-    public void writeSQL(SQLOutput stream) throws SQLException {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
 }

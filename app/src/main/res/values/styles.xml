@@ -35,4 +35,8 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    
+    <style name="welcompage" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/welcome</item>
+    </style>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.administrator.notebook.MainUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.internal.NavigationMenu;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.administrator.notebook.MyAdpter;
 import com.example.administrator.notebook.Passwd.BaseActivity;
 import com.example.administrator.notebook.R;
 
@@ -122,8 +124,26 @@ public class MainActivity extends BaseActivity {
             list.add("item"+i);
         }
 
-        ArrayAdapter a = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
-        lv.setAdapter(a);
+        MyAdpter adapter=new MyAdpter(this,list);
+//        ArrayAdapter a = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                MainActivity.this.startActivity(new Intent(MainActivity.this,SecondActivity.class));
+            }
+        });
+
+
+        adapter.setOnImageListner(new MyAdpter.CallBack() {
+            @Override
+            public void onImageBackListner(View v, int position) {
+                Toast.makeText(MainActivity.this, "image"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
 
