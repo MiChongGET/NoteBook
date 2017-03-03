@@ -29,4 +29,5 @@ dependencies {
     compile 'com.github.fafaldo:fab-toolbar:1.2.0'
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.android.support:design:25.2.0'
+
 }
