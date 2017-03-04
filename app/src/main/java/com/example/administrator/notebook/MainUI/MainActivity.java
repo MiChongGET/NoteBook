@@ -8,17 +8,19 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.administrator.notebook.Functions.Read_note;
 import com.example.administrator.notebook.MyAdpter;
 import com.example.administrator.notebook.Passwd.BaseActivity;
 import com.example.administrator.notebook.R;
+import com.example.administrator.notebook.Sql.UserData;
+import com.example.administrator.notebook.Sql.UserDo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import io.github.yavski.fabspeeddial.FabSpeedDial;
@@ -96,13 +98,11 @@ public class MainActivity extends BaseActivity {
                         if (direction == 1) {
 
                             //上滑todo
-                            System.out.println("上滑");
                             fabSpeedDial.hide();
 
                         } else if (direction == 0) {
 
                             //下滑todo
-                            System.out.println("下滑");
                             fabSpeedDial.show();
                         }
                         break;
@@ -113,25 +113,43 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-    }
 
+    }
 
 
     //list列表中实现加载数据
     private void fillList(ListView lv) {
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i <50 ; i++) {
-            list.add("item"+i);
+        //List<UserData> list = new ArrayList<UserData>();
+
+        //Sqlite数据库测试
+        UserDo userDo = new UserDo(MainActivity.this);
+        //userDo.addSql();
+
+        List<UserData> list =  userDo.readSql();
+
+        //获取标题
+        List<String> titltlist = new ArrayList<>();
+
+        //获取ID
+        System.out.println("获取ID"+userDo.getCount());
+        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+            UserData userdata = (UserData) iterator.next();
+            titltlist.add(userdata.getTitle());
+//            System.out.println(userdata.getId());
+//            System.out.println(userdata.getTitle());
+//            System.out.println(userdata.getContent());
+//            System.out.println(userdata.getTime());
         }
 
-        MyAdpter adapter=new MyAdpter(this,list);
-//        ArrayAdapter a = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        MyAdpter adapter=new MyAdpter(this,list,titltlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                MainActivity.this.startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                startActivity(new Intent(MainActivity.this, Read_note.class));
+
+                Toast.makeText(MainActivity.this, "item"+position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -143,7 +161,5 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
     }
-
 }

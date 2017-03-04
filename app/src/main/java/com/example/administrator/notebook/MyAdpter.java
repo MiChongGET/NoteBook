@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.notebook.Sql.UserData;
+
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,13 +19,13 @@ import java.util.List;
 
 public class MyAdpter extends BaseAdapter {
     Context context;
-    List<String> list;
+    List<UserData> list;
+    List<String> titlelist;
 
-
-    public MyAdpter(Context context, List<String> list) {
+    public MyAdpter(Context context, List<UserData> list,List<String> titlelist) {
         this.context = context;
         this.list = list;
-
+        this.titlelist = titlelist;
     }
 
     @Override
@@ -42,7 +45,13 @@ public class MyAdpter extends BaseAdapter {
 
     @Override
     public View getView( final int position, View convertView, ViewGroup parent) {
-        String text = list.get(position);
+
+//        UserData userData = list.iterator().next();
+//        String title = userData.getTitle();
+//        String time = userData.getTime();
+
+        String title = titlelist.get(position);
+
         ViewHolder mViewHolder;
 
         if (convertView == null) {
@@ -56,7 +65,8 @@ public class MyAdpter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
-        mViewHolder.tx.setText(text);
+
+        mViewHolder.tx.setText(title);
 
         mViewHolder.img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +74,9 @@ public class MyAdpter extends BaseAdapter {
                 mCallBack.onImageBackListner(v,position);
             }
         });
+
+
+
         return convertView;
     }
 

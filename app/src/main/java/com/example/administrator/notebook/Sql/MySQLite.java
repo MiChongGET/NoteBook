@@ -10,17 +10,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLite extends SQLiteOpenHelper {
 
+    private static String name = "diary.db";
+    private static int version = 1 ;
+
     public MySQLite(Context context) {
-        super(context, "db", null, 1);
+        super(context, name, null, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table user(" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "title TEXT DEFAULT NULL," +
-                "content TEXT DEFAULT " +
-                "前[CreatedTime] TimeStamp NOT NULL DEFAULT (datetime('now','localtime')\"\")");
+        String sql = "create table user(" +
+                "id integer primary key autoincrement, " +
+                "title varchar(64)," +
+                "content varchar(144)," +
+                "time varchar(20))";
+        db.execSQL(sql);
     }
 
     @Override

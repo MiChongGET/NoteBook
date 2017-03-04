@@ -23,7 +23,10 @@
         <activity android:name=".Passwd.PassWordActivity" />
         <activity android:name=".Setting.Setting" />
         <activity android:name=".Functions.Write_note" />
-        <activity android:name=".MainUI.SecondActivity"></activity>
+        <activity
+            android:name=".Functions.Read_note"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
     </application>
 
 </manifest>
