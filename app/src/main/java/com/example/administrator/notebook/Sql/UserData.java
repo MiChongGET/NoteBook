@@ -1,10 +1,12 @@
 package com.example.administrator.notebook.Sql;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/3/4 0004.
  */
 
-public class UserData {
+public class UserData implements Serializable{
     private int id;
     private String title;
     private String content;

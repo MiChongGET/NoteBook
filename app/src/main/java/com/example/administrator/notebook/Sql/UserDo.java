@@ -27,14 +27,14 @@ public class UserDo {
 
 
     //读数据库
-    public List<UserData> readSql() {
+    public   List<UserData> readSql() {
         sqLiteDatabase = mySQLite.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query("user",null,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("user",null,null,null,null,null,"id desc");
 
         return convertToTree(cursor);
     }
     //获取日记的个数
-    public Long getCount(){
+    public  Long getCount(){
         sqLiteDatabase = mySQLite.getReadableDatabase();
         String sql = "select count(*) from user";
         Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
@@ -46,7 +46,7 @@ public class UserDo {
     }
 
 
-    private List<UserData> convertToTree(Cursor cursor) {
+    private  List<UserData> convertToTree(Cursor cursor) {
         int resultCounts = cursor.getCount();
         if (resultCounts == 0 || !cursor.moveToFirst()) {
             return null;
@@ -67,23 +67,23 @@ public class UserDo {
 
 
     //删除数据库
-    public void deletSql() {
+    public  void deletSql() {
 
     }
 
     //添加内容
-    public void addSql() {
+    public  void addSql(String title,String content,String time) {
         sqLiteDatabase =  mySQLite.getWritableDatabase();
         ContentValues c = new ContentValues();
-        c.put("title","three");
-        c.put("content","第三次写日记");
-        c.put("time","2017.3.4");
+        c.put("title",title);
+        c.put("content",content);
+        c.put("time",time);
         sqLiteDatabase.insert("user",null,c);
         sqLiteDatabase.close();
     }
 
     //更新数据库内容
-    public void updateSql() {
+    public  void updateSql() {
 
     }
 

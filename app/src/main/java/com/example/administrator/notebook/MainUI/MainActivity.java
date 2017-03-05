@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.administrator.notebook.Functions.Read_note;
+import com.example.administrator.notebook.Functions.Write_note;
 import com.example.administrator.notebook.MyAdpter;
 import com.example.administrator.notebook.Passwd.BaseActivity;
 import com.example.administrator.notebook.R;
@@ -64,6 +65,8 @@ public class MainActivity extends BaseActivity {
                 switch (id){
                     case R.id.riji_write:
                         Toast.makeText(MainActivity.this,"写日记",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, Write_note.class));
+
                         break;
                     case R.id.activity_setting:
                         Toast.makeText(MainActivity.this,"设置",Toast.LENGTH_SHORT).show();
@@ -123,43 +126,58 @@ public class MainActivity extends BaseActivity {
 
         //Sqlite数据库测试
         UserDo userDo = new UserDo(MainActivity.this);
-        //userDo.addSql();
+       // userDo.addSql();
 
-        List<UserData> list =  userDo.readSql();
+        final List<UserData> list = userDo.readSql();
+        //先判断数据库中有没有数据
+//        if (list == null) {
+//            userDo.addSql();
+//        } else {
 
-        //获取标题
-        List<String> titltlist = new ArrayList<>();
+            //标题集合
+            List<String> titltlist = new ArrayList<>();
+            //内容集合
+            List<String> contentlist = new ArrayList<>();
+            //时间集合
+            List<String> timelist = new ArrayList<>();
 
-        //获取ID
-        System.out.println("获取ID"+userDo.getCount());
-        for (Iterator iterator = list.iterator(); iterator.hasNext();) {
-            UserData userdata = (UserData) iterator.next();
-            titltlist.add(userdata.getTitle());
-//            System.out.println(userdata.getId());
-//            System.out.println(userdata.getTitle());
-//            System.out.println(userdata.getContent());
-//            System.out.println(userdata.getTime());
+            //获取ID
+            System.out.println("获取ID" + userDo.getCount());
+            for (Iterator iterator = list.iterator(); iterator.hasNext(); ) {
+                UserData userdata = (UserData) iterator.next();
+                titltlist.add(userdata.getTitle());
+//                contentlist.add(userdata.getContent());
+//                timelist.add(userdata.getTime());
+            }
+
+            MyAdpter adapter = new MyAdpter(this, list, titltlist);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    //根据position获取list的对应位置
+                    UserData read = list.get(position);
+
+                    //传递一个UserData对象到Read_note中
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this,Read_note.class);
+                    bundle.putSerializable("diary",read);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+                    Toast.makeText(MainActivity.this, "item" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            adapter.setOnImageListner(new MyAdpter.CallBack() {
+                @Override
+                public void onImageBackListner(View v, int position) {
+                    Toast.makeText(MainActivity.this, "image" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
-
-        MyAdpter adapter=new MyAdpter(this,list,titltlist);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                startActivity(new Intent(MainActivity.this, Read_note.class));
-
-                Toast.makeText(MainActivity.this, "item"+position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        adapter.setOnImageListner(new MyAdpter.CallBack() {
-            @Override
-            public void onImageBackListner(View v, int position) {
-                Toast.makeText(MainActivity.this, "image"+position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
     }
-}
+
