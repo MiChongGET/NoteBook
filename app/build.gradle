@@ -30,5 +30,6 @@ dependencies {
     compile 'com.github.fafaldo:fab-toolbar:1.2.0'
     compile 'io.github.yavski:fab-speed-dial:1.0.6'
     compile 'com.android.support:design:25.2.0'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
     testCompile 'junit:junit:4.12'
 }

@@ -21,11 +21,13 @@ public class MyAdpter extends BaseAdapter {
     Context context;
     List<UserData> list;
     List<String> titlelist;
+    List<String> timelist;
 
-    public MyAdpter(Context context, List<UserData> list,List<String> titlelist) {
+    public MyAdpter(Context context, List<UserData> list,List<String> titlelist,List<String> timelist) {
         this.context = context;
         this.list = list;
         this.titlelist = titlelist;
+        this.timelist = timelist;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class MyAdpter extends BaseAdapter {
 //        String time = userData.getTime();
 
         String title = titlelist.get(position);
+        String time = timelist.get(position);
 
         ViewHolder mViewHolder;
 
@@ -59,6 +62,7 @@ public class MyAdpter extends BaseAdapter {
             mViewHolder = new ViewHolder();
             mViewHolder.tx = (TextView) convertView.findViewById(R.id.item_txt);
             mViewHolder.img = (ImageView) convertView.findViewById(R.id.item_img);
+            mViewHolder.time = (TextView) convertView.findViewById(R.id.read_time);
 
             convertView.setTag(mViewHolder);
 
@@ -67,6 +71,7 @@ public class MyAdpter extends BaseAdapter {
         }
 
         mViewHolder.tx.setText(title);
+        mViewHolder.time.setText(time);
 
         mViewHolder.img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +89,7 @@ public class MyAdpter extends BaseAdapter {
     class ViewHolder {
         private TextView tx;
         private ImageView img;
+        private TextView time;
     }
 
 

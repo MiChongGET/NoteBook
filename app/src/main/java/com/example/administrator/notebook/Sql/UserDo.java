@@ -67,8 +67,13 @@ public class UserDo {
 
 
     //删除数据库
-    public  void deletSql() {
-
+    public  void deletSql(int id) {
+        sqLiteDatabase = mySQLite.getWritableDatabase();
+//        String sql = "delete from user where id = "+18;
+//        Cursor cursor = sqLiteDatabase.rawQuery(sql,null);
+//        sqLiteDatabase.close();
+       sqLiteDatabase.delete("user","id=?",new String[]{id+""});
+        sqLiteDatabase.close();
     }
 
     //添加内容

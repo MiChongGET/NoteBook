@@ -23,34 +23,12 @@ public class PassWordActivity extends Activity {
         editText = (EditText) findViewById(R.id.passworld);
         sure = (Button) findViewById(R.id.ture);
 
-
-//        //记录密码
-//        sp = getSharedPreferences("michong",MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        //查询是否是第一次登录
-//        boolean isFirstIn = sp.getBoolean("isFirstIn", Boolean.parseBoolean(""));
-//        System.out.println(isFirstIn);
-//        if (isFirstIn){
-//
-//            passwd = editText.getText().toString();
-//            editor.putString("passwd",passwd);
-//            editor.commit();
-//
-//            System.out.println("是第一次登录");
-//        }
-//        else {
-//            t.setVisibility(View.INVISIBLE);
-//            System.out.println("不是第一次登录");
-//        }
-
-
-
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String passwd = editText.getText().toString();
                 if (passwd!=null && passwd.equals(myApplication.password)){
-                    System.out.println(passwd+":::"+myApplication.password);
+                 //   System.out.println(passwd+":::"+myApplication.password);
 
                     Toast.makeText(PassWordActivity.this,"密码正确",Toast.LENGTH_LONG).show();
                     myApplication.isLocked = false;

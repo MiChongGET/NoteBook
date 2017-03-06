@@ -40,8 +40,7 @@ public class Read_note extends AppCompatActivity {
         UserData userData = (UserData) intent.getSerializableExtra("diary");
 
         String html = "<h1><font color=\"#ff0000\" size=\"50px\" align=\"center\">" + userData.getTitle() + "</font></h1>" +
-                "<p size=\"25px\">"+userData.getContent()+"</p>"+"<p></p><p></p>" +
-                "<p></p>"+"<p align=\"right\" size=\"14px\">"+"      "+"——"+userData.getTime()+"</p>";
+                "<p><font size=\"25px\">"+userData.getContent()+"</font></p>"+"<p><font align=\"right\" size=\"14px\">"+"      "+"——"+userData.getTime()+"</font></p>";
         textView.setText(Html.fromHtml(html));
     }
 }

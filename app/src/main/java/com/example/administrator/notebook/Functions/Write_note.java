@@ -1,5 +1,8 @@
 package com.example.administrator.notebook.Functions;
 
+/**
+ * 写日记功能实现----by MiChong
+ */
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,8 @@ import com.example.administrator.notebook.Sql.UserDo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.greenrobot.event.EventBus;
+
 public class Write_note extends AppCompatActivity {
 
     private EditText write_title;
@@ -29,6 +34,7 @@ public class Write_note extends AppCompatActivity {
                 dialog.success();
                 dialog.dismiss();
                 finish();
+                EventBus.getDefault().post(new WriteEvent("日记已经记录完成！！！"));
             }
         };
     };
@@ -76,6 +82,7 @@ public class Write_note extends AppCompatActivity {
                     userDo.addSql(title, content, sf.format(date));
                     dialog.show();
                     handler.sendEmptyMessageDelayed(0, 2000);
+
                 }
                 else
                     Toast.makeText(Write_note.this, "内容为空!", Toast.LENGTH_SHORT).show();
